@@ -1,23 +1,22 @@
 import axios from 'axios';
 
+import { Coin } from '@/types/types';
+
 export async function getCoinsList() {
   try {
-    const res = await fetch('https://api.binance.com/api/v1/exchangeInfo');
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
+    const { data } = await axios.get(
+      'https://api.binance.com/api/v1/exchangeInfo',
+    );
+    return data;
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function getSelectedCoin(coinId: string) {
+export async function getCoinPairPrice(coinsPair: string) {
   try {
     const { data } = await axios.get(
-      `https://api.binance.com/api/v3/ticker/price?symbol=${coinId}`,
+      `https://api.binance.com/api/v3/ticker/price?symbol=${coinsPair}`,
     );
     return Number(data.price);
   } catch (error) {

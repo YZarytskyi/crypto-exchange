@@ -4,9 +4,9 @@ import SectionContainer from '@/components/SectionContainer';
 
 const Footer: FC = () => {
   return (
-    <footer>
+    <footer className="py-5">
       <SectionContainer>
-        <div className="mx-auto max-w-xl">Footer</div>
+        <p>Footer</p>
       </SectionContainer>
     </footer>
   );

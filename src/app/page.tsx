@@ -8,7 +8,7 @@ export default function Main() {
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-[90vh] max-w-xl">
+      <main className="mx-auto min-h-[85vh] max-w-xl">
         <Exchange />
         <About />
         <Contacts />

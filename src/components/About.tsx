@@ -4,9 +4,9 @@ import SectionContainer from '@/components/SectionContainer';
 
 const About: FC = () => {
   return (
-    <section>
+    <section className="py-5">
       <SectionContainer>
-        <div className="mx-auto max-w-xl">About us</div>
+        <h2 className="text-center text-3xl">About us</h2>
       </SectionContainer>
     </section>
   );
