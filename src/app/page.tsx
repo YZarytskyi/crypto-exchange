@@ -2,16 +2,16 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Exchange from '@/components/Exchange';
 import About from '@/components/About';
-import Contacts from '@/components/Contacts';
+import Support from '@/components/Support';
 
 export default function Main() {
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-[85vh] max-w-xl">
+      <main className="mx-auto max-w-xl">
         <Exchange />
         <About />
-        <Contacts />
+        <Support />
       </main>
       <Footer />
     </>

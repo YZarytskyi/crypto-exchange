@@ -14,7 +14,7 @@ const Header: FC = () => {
           <p className="text-xl">Crypto Exchange</p>
         </div>
         <nav>
-          <ul className="flex gap-3">
+          <ul className="flex gap-5">
             <li>
               <a href="#exchange">Exchange</a>
             </li>
@@ -22,7 +22,7 @@ const Header: FC = () => {
               <a href="#about">About</a>
             </li>
             <li>
-              <a href="#contacts">Contacts</a>
+              <a href="#support">Support</a>
             </li>
           </ul>
         </nav>

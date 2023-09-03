@@ -95,10 +95,13 @@ const Exchange: React.FC = () => {
   };
 
   return (
-    <section id="exchange" className="py-5">
+    <section id="exchange" className="py-10">
       <SectionContainer className="flex gap-3">
-        <div className="flex w-1/2 items-center justify-center text-3xl">
-          Crypto Exchange
+        <div className="flex w-1/2 flex-col justify-center text-3xl">
+          <p className="mb-5 text-5xl">Crypto Exchange</p>
+          <p className="text-xl text-gray-400">
+            Best cryptocurrency exchanger 2023
+          </p>
         </div>
         <div className="w-1/2">
           <div className="rounded-2xl bg-gray-900 p-8">
@@ -125,7 +128,7 @@ const Exchange: React.FC = () => {
                 renderOption={(props, option) => (
                   <li
                     {...props}
-                    className="flex cursor-pointer items-center gap-3 bg-gray-800 px-2 py-3 hover:bg-gray-700"
+                    className="flex cursor-pointer items-center gap-3 bg-gray-800 p-3 hover:bg-gray-700"
                   >
                     <Image
                       src={option.icon}
@@ -184,7 +187,7 @@ const Exchange: React.FC = () => {
                 renderOption={(props, option) => (
                   <li
                     {...props}
-                    className="flex cursor-pointer items-center gap-3 bg-gray-800 px-2 py-3 hover:bg-gray-700"
+                    className="flex cursor-pointer items-center gap-3 bg-gray-800 p-3 hover:bg-gray-700"
                   >
                     <Image
                       src={option.icon}

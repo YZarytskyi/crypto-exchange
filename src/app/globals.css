@@ -16,7 +16,11 @@
 /*  }*/
 /*}*/
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #09090d;
-    color: white;
+    color: whitesmoke;
 }
