@@ -1,6 +1,12 @@
 'use client';
 
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from 'react';
 import Image from 'next/image';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -11,8 +17,9 @@ import SectionContainer from '@/components/SectionContainer';
 import { getCoinOptions, sendCoinsOptions } from '@/data/coins';
 import { CoinsSelect } from '@/types/types';
 
-import BTCIcon from '../../../public/BTC.png';
-import ETHIcon from '../../../public/ETH.png';
+import BTCIcon from '../../public/BTC.png';
+import ETHIcon from '../../public/ETH.png';
+import { Spinner } from '@/components/Spinner';
 
 const Exchange: React.FC = () => {
   const [sendCoin, setSendCoin] = useState<CoinsSelect>({
@@ -28,6 +35,7 @@ const Exchange: React.FC = () => {
   const [sendCoinInput, setSendCoinInput] = useState<number | ''>(1);
   const [getCoinInput, setGetCoinInput] = useState<number | ''>('');
   const [currentPrice, setCurrentPrice] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchCoinPairPrice();
@@ -36,28 +44,26 @@ const Exchange: React.FC = () => {
   }, [sendCoin, getCoin]);
 
   async function fetchCoinPairPrice() {
+    setIsLoading(true);
+    setGetCoinInput('');
+
     const price = await getCoinPairPrice(`${sendCoin.coin}${getCoin.coin}`);
 
     if (price) {
       const formattedPrice = price + price * 0.05;
-      console.log(price, formattedPrice);
       setCurrentPrice(formattedPrice);
       setGetCoinInput(numberToFixed((sendCoinInput || 0) * formattedPrice));
     }
+
+    setIsLoading(false);
   }
 
-  const onChangeSendCoin = (
+  const onChangeCoin = (
     e: SyntheticEvent,
     newCoin: CoinsSelect | null,
+    setState: Dispatch<SetStateAction<CoinsSelect>>,
   ): void => {
-    if (newCoin) setSendCoin(newCoin);
-  };
-
-  const onChangeGetCoin = (
-    e: SyntheticEvent,
-    newCoin: CoinsSelect | null,
-  ): void => {
-    if (newCoin) setGetCoin(newCoin);
+    if (newCoin) setState(newCoin);
   };
 
   const onChangeSendCoinInput: React.ChangeEventHandler<
@@ -113,7 +119,7 @@ const Exchange: React.FC = () => {
                 disableClearable
                 blurOnSelect
                 value={sendCoin}
-                onChange={onChangeSendCoin}
+                onChange={(e, newCoin) => onChangeCoin(e, newCoin, setSendCoin)}
                 options={sendCoinsOptions}
                 getOptionLabel={coin => coin.coin}
                 renderOption={(props, option) => (
@@ -139,9 +145,15 @@ const Exchange: React.FC = () => {
               />
             </div>
 
-            <div className="flex justify-between">
-              <p>
-                1 {sendCoin.coin} = {currentPrice} {getCoin.coin}
+            <div className="flex items-center justify-between">
+              <p className="flex items-center gap-2">
+                1 {sendCoin.coin} ={' '}
+                {isLoading ? (
+                  <Spinner className="inline-flex h-[20px] w-[20px]" />
+                ) : (
+                  currentPrice
+                )}{' '}
+                {getCoin.coin}
               </p>
               <button className="mb-6" onClick={fetchCoinPairPrice}>
                 Update Price
@@ -151,7 +163,7 @@ const Exchange: React.FC = () => {
             <label htmlFor="get-coins" className="mb-2 block text-xs">
               You receive
             </label>
-            <div className="mb-8 flex gap-3">
+            <div className="relative mb-8 flex gap-3">
               <input
                 id="get-coins"
                 type="number"
@@ -159,13 +171,16 @@ const Exchange: React.FC = () => {
                 onChange={onChangeGetCoinInput}
                 className="focus:shadow-inputFocus border-input flex-grow rounded-md border-[1px] bg-transparent px-4 py-2 outline-none"
               />
+              {isLoading && (
+                <Spinner className="absolute left-[18px] top-1/2 h-[22px] w-[22px] -translate-y-1/2" />
+              )}
               <Autocomplete
                 id="get-coins-list"
                 className="w-[150px] focus-within:w-full"
                 disableClearable
                 blurOnSelect
                 value={getCoin}
-                onChange={onChangeGetCoin}
+                onChange={(e, newCoin) => onChangeCoin(e, newCoin, setGetCoin)}
                 options={getCoinOptions}
                 getOptionLabel={option => option.coin}
                 renderOption={(props, option) => (

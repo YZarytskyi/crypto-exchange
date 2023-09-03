@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Exchange from '@/components/Exchange/Exchange';
+import Exchange from '@/components/Exchange';
 import About from '@/components/About';
 import Contacts from '@/components/Contacts';
 
