@@ -145,7 +145,7 @@ const Exchange: React.FC = () => {
               />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="mb-6 flex items-center justify-between">
               <p className="flex items-center gap-2">
                 1 {sendCoin.coin} ={' '}
                 {isLoading ? (
@@ -155,9 +155,7 @@ const Exchange: React.FC = () => {
                 )}{' '}
                 {getCoin.coin}
               </p>
-              <button className="mb-6" onClick={fetchCoinPairPrice}>
-                Update Price
-              </button>
+              <button onClick={fetchCoinPairPrice}>Update Price</button>
             </div>
 
             <label htmlFor="get-coins" className="mb-2 block text-xs">
