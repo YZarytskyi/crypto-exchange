@@ -114,7 +114,7 @@ const Exchange: React.FC = () => {
                 type="number"
                 value={sendCoinInput}
                 onChange={onChangeSendCoinInput}
-                className="focus:shadow-inputFocus border-input flex-grow rounded-md border-[1px] bg-transparent px-4 py-2 outline-none"
+                className="flex-grow rounded-md border-[1px] border-input bg-transparent px-4 py-2 outline-none focus:shadow-inputFocus"
               />
               <Autocomplete
                 id="send-coins-list"
@@ -154,7 +154,7 @@ const Exchange: React.FC = () => {
                 {isLoading ? (
                   <Spinner className="inline-flex h-[20px] w-[20px]" />
                 ) : (
-                  currentPrice
+                  numberToFixed(currentPrice)
                 )}{' '}
                 {getCoin.coin}
               </p>
@@ -170,7 +170,7 @@ const Exchange: React.FC = () => {
                 type="number"
                 value={getCoinInput}
                 onChange={onChangeGetCoinInput}
-                className="focus:shadow-inputFocus border-input flex-grow rounded-md border-[1px] bg-transparent px-4 py-2 outline-none"
+                className="flex-grow rounded-md border-[1px] border-input bg-transparent px-4 py-2 outline-none focus:shadow-inputFocus"
               />
               {isLoading && (
                 <Spinner className="absolute left-[18px] top-1/2 h-[22px] w-[22px] -translate-y-1/2" />
